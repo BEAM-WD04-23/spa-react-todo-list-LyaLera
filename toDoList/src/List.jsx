@@ -1,4 +1,4 @@
-export default function List({ list, deleteTask }) {
+export default function List({ list, deleteTask, closeTask }) {
   if (list.length === 0) {
     return <p>No tasks today!</p>;
   }
@@ -8,16 +8,21 @@ export default function List({ list, deleteTask }) {
       <div>
         {list.map((task, index) => {
           return (
-            <p key={index}>
-              {task.name || task}
-              <button
-                onClick={() => {
-                  deleteTask(index);
-                }}
-              >
-                Delete Task
-              </button>
-            </p>
+              <p key={index}>
+              <input
+                  type="checkbox"
+                  onChange={closeTask(task)}
+                  checked={closeTask(task)}
+                />
+                {task.name || task}
+                <button
+                  onClick={() => {
+                    deleteTask(index);
+                  }}
+                >
+                  Delete Task
+                </button>
+              </p>
           );
         })}
       </div>

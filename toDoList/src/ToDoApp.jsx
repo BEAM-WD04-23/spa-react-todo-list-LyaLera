@@ -7,7 +7,6 @@ import List from "./List";
 export default function ToDoApp() {
   const [task, setTask] = useState("");
   const [list, setList] = useState([]);
-  const [status, setStatus] = useState(false)
 
   const takeIntup = (e) => {
     setTask(e.target.value);
@@ -16,7 +15,7 @@ export default function ToDoApp() {
   const addTaskToList = (text) => {
     setList([...list, {
       name: text,
-      status: status,
+      done: false,
       id: uuidv4()
     }]);
   };
@@ -25,18 +24,24 @@ export default function ToDoApp() {
     let filteredList = list.filter((task, index) => {
       return index !== indexOfTaskToCancel;
     });
-    setList(filteredList);
+    setList(filteredList)
   };
 
-  const closeTask = (clickedTaskStatus) => {
-    clickedTaskStatus === true 
-    setStatus(clickedTaskStatus)
+  const changeTask = (changedTask) => {
+    setList(list.map(task => {
+      if(task.id === changedTask.id) {
+        return changedTask
+      } else {
+        return task
+      }
+    }))
   }
-
+  console.log(list)
+  
   return (
     <>
       <AddTasks task={task} addTask={addTaskToList} takeIntup={takeIntup}/>
-      <List list={list} deleteTask={deleteTaskFromList} closeTask={closeTask}/>
+      <List list={list} deleteTask={deleteTaskFromList} changeTask={changeTask}/>
     </>
   );
 }

@@ -8,12 +8,11 @@ export default function List({ list, deleteTask, closeTask }) {
       <h3>Your To Do List for Toady</h3>
       <div>
         {list.map((task, index) => {
-          console.log(task.status)
           return (
               <p key={index}>
               <input
                   type="checkbox"
-                  onChange={closeTask(task.status)}
+                  onChange={(task) => {return closeTask(task.status)}}
                   checked={closeTask(task.status)}
                 />
                 {task.name}

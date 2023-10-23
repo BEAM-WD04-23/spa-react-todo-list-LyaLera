@@ -7,6 +7,7 @@ import List from "./List";
 export default function ToDoApp() {
   const [task, setTask] = useState("");
   const [list, setList] = useState([]);
+  const [status, setStatus] = useState(false)
 
   const takeIntup = (e) => {
     setTask(e.target.value);
@@ -15,7 +16,7 @@ export default function ToDoApp() {
   const addTaskToList = (text) => {
     setList([...list, {
       name: text,
-      status: false,
+      status: status,
       id: uuidv4()
     }]);
   };
@@ -27,11 +28,10 @@ export default function ToDoApp() {
     setList(filteredList);
   };
 
-  const closeTask = (status) => {
-    status === true
+  const closeTask = (clickedTaskStatus) => {
+    clickedTaskStatus === true 
+    setStatus(clickedTaskStatus)
   }
-
-  console.log(list)
 
   return (
     <>

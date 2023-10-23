@@ -2,11 +2,12 @@ import { useState } from "react";
 
 export default function AddTasks({ addTask }) {
   const [task, setTask] = useState("");
-  
+
   return (
     <>
       <h3>Type your task to add to Your List</h3>
-      <form onSubmit={(e) => {
+      <form 
+        onSubmit={(e) => {
         e.preventDefault()
         setTask("")
         addTask(task)

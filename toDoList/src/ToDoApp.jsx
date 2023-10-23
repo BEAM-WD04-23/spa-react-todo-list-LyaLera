@@ -1,46 +1,23 @@
 import { useState } from "react";
-import Tasks from "./Tasks";
+import { v4 as uuidv4 } from 'uuid';
+import AddTasks from "./AddTasks";
 import List from "./List";
 
-let task1 = {
-  name: "Learn React",
-  status: false,
-  id: "01",
-};
-let task2 = {
-  name: "Cook the dinner",
-  status: false,
-  id: "02",
-};
-let task3 = {
-  name: "Book a trip",
-  status: false,
-  id: "03",
-};
-let task4 = {
-  name: "Read an article",
-  status: false,
-  id: "04",
-};
-let task5 = {
-  name: "Do exercises",
-  status: false,
-  id: "05",
-};
 
 export default function ToDoApp() {
   const [task, setTask] = useState("");
-  const [tasks] = useState([task1, task2, task3, task4, task5]);
   const [list, setList] = useState([]);
-  const [status, setStatus] = useState(false) 
 
   const takeIntup = (e) => {
     setTask(e.target.value);
   };
 
-  const addTaskToList = (clickedTask) => {
-    setList([...list, clickedTask]);
-    console.log(list)
+  const addTaskToList = (text) => {
+    setList([...list, {
+      name: text,
+      status: false,
+      id: uuidv4()
+    }]);
   };
 
   const deleteTaskFromList = (indexOfTaskToCancel) => {
@@ -50,22 +27,15 @@ export default function ToDoApp() {
     setList(filteredList);
   };
 
-  const closeTask = (clickedTask) => {
-    setStatus(clickedTask.status === true)
-    console.log(clickedTask.status)
+  const closeTask = (status) => {
+    status === true
   }
+
+  console.log(list)
 
   return (
     <>
-      <h3>Type your task to add to Your List</h3>
-      <input value={task} onChange={takeIntup} />
-      <p>Your task: {task}</p>
-      <button onClick={() => {
-                addTaskToList(task);
-      }}>
-            Add Task
-      </button>
-      <Tasks tasks={tasks} addTask={addTaskToList} />
+      <AddTasks task={task} addTask={addTaskToList} takeIntup={takeIntup}/>
       <List list={list} deleteTask={deleteTaskFromList} closeTask={closeTask}/>
     </>
   );

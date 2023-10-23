@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function List({ list, deleteTask, changeTask }) {
-  
+
   if (list.length === 0) {
     return <p>No tasks today!</p>;
   }

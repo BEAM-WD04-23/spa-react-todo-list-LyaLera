@@ -5,12 +5,7 @@ import List from "./List";
 
 
 export default function ToDoApp() {
-  const [task, setTask] = useState("");
   const [list, setList] = useState([]);
-
-  const takeIntup = (e) => {
-    setTask(e.target.value);
-  };
 
   const addTaskToList = (text) => {
     setList([...list, {
@@ -20,9 +15,9 @@ export default function ToDoApp() {
     }]);
   };
 
-  const deleteTaskFromList = (indexOfTaskToCancel) => {
-    let filteredList = list.filter((task, index) => {
-      return index !== indexOfTaskToCancel;
+  const deleteTaskFromList = (id) => {
+    let filteredList = list.filter((task) => {
+      return task.id !== id;
     });
     setList(filteredList)
   };
@@ -37,10 +32,10 @@ export default function ToDoApp() {
     }))
   }
   console.log(list)
-  
+
   return (
     <>
-      <AddTasks task={task} addTask={addTaskToList} takeIntup={takeIntup}/>
+      <AddTasks addTask={addTaskToList}/>
       <List list={list} deleteTask={deleteTaskFromList} changeTask={changeTask}/>
     </>
   );

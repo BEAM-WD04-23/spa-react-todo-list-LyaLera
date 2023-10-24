@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
-import AddTasks from "./AddTasks";
+import AddTasksFormik from "./AddTasksFormik";
 import List from "./List";
 
 
 export default function ToDoApp() {
   const [list, setList] = useState([]);
 
-  const addTaskToList = (text) => {
+  const addTaskToList = (textOfTask) => {
     setList([...list, {
-      name: text,
+      name: textOfTask,
       done: false,
       id: uuidv4()
     }]);
@@ -35,7 +35,7 @@ export default function ToDoApp() {
 
   return (
     <>
-      <AddTasks addTask={addTaskToList}/>
+      <AddTasksFormik addTask={addTaskToList}/>
       <List list={list} deleteTask={deleteTaskFromList} changeTask={changeTask}/>
     </>
   );

@@ -17,7 +17,7 @@ const AddTasksFormik = ({addTask}) => (
   }}>
     <Form>
         <Field name="textOfTask" type="text"/>
-        <button>Add task</button>
+        <button type='submit'>Add task</button>
         <div><ErrorMessage name="textOfTask"/></div>
     </Form>
   </Formik>

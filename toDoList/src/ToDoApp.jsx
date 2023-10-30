@@ -1,11 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import AddTasksFormik from "./AddTasksFormik";
 import List from "./List";
 
 
 export default function ToDoApp() {
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(() => {
+    let savedTasks = JSON.parse(localStorage.getItem("tasks"))
+    return savedTasks || ""
+  });
+
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(list))
+  }, [list])
+
 
   const addTaskToList = (textOfTask) => {
     setList([...list, {

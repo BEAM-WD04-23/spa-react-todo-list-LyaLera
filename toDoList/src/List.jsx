@@ -42,7 +42,7 @@ function Task({ task, changeTask, deleteTask }) {
       </>
     );
   } else {
-    listContent = (
+    listContent = ( 
       <>
         {task.name}
         <button onClick={() => setIsEditing(true)}>Edit</button>

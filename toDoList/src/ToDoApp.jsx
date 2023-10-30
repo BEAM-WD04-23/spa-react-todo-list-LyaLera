@@ -40,11 +40,17 @@ export default function ToDoApp() {
       }
     }))
   }
+
+  const deleteAllTasks = () => {
+    setList("")
+  }
+
   console.log(list)
 
   return (
     <>
       <AddTasksFormik addTask={addTaskToList}/>
+      <button onClick={deleteAllTasks}>Delete all tasks</button>
       <List list={list} deleteTask={deleteTaskFromList} changeTask={changeTask}/>
     </>
   );

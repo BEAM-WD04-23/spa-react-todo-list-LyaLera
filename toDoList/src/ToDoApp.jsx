@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import AddTasksFormik from "./AddTasksFormik";
 import List from "./List";
+import Meal from "./Meal";
 
 export default function ToDoApp() {
   const [list, setList] = useState(() => {
@@ -76,6 +77,7 @@ export default function ToDoApp() {
         deleteTask={deleteTaskFromList}
         changeTask={changeTask}
       />
+      <Meal/>
     </>
   );
 }

@@ -84,6 +84,9 @@ background-color: #888;
 }
 
 .home {
-  color: rgb(23, 23, 23);
   font-weight: bold;
+}
+
+.active {
+  color: rgb(19, 19, 19);
 }

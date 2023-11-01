@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function Meal() {
   const [meal, setMeal] = useState("");
-  const [img, setImg] = useState("")
+//   const [img, setImg] = useState("")
   const [error, setError] = useState("");
   const [isFetching, setIsFetching] = useState(false);
 
@@ -21,8 +22,9 @@ export default function Meal() {
                 name: mealData.meals[0].strMeal,
                 img: mealData.meals[0].strMealThumb
             }
-            setMeal(randomMeal.name)
-            setImg(randomMeal.img)
+            console.log(mealData.meals)
+            setMeal([randomMeal.name, randomMeal.img])
+            // setImg(randomMeal.img)
           }
         } else {
           setError("Something went wrong");
@@ -43,7 +45,8 @@ export default function Meal() {
     <>
       <h3>Meal to prepare today:</h3>
       {isFetching && "...loading"}
-      {error ? <p>{error}</p> : <><p>{meal}</p><img src={img} width={"300px"}/></>}
+      {error ? <p>{error}</p> : <><p>{meal[0]}</p><img src={meal[1]} width={"300px"}/><br/></>}
+      <button><Link to='/'>Back to Home Page</Link></button>
     </>
   );
 }

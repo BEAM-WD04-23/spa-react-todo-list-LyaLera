@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { Link } from "react-router-dom";
 import AddTasksFormik from "./AddTasksFormik";
 import List from "./List";
-import Meal from "./Meal";
+import Header from "./Header";
 
 export default function ToDoApp() {
   const [list, setList] = useState(() => {
@@ -70,6 +71,7 @@ export default function ToDoApp() {
 
   return (
     <>
+      <Header />
       <AddTasksFormik addTask={addTaskToList} />
       <button onClick={deleteAllTasks}>Delete all tasks</button>
       <List
@@ -77,7 +79,7 @@ export default function ToDoApp() {
         deleteTask={deleteTaskFromList}
         changeTask={changeTask}
       />
-      <Meal/>
+      <button><Link to='/'>Back to Home Page</Link></button>
     </>
   );
 }

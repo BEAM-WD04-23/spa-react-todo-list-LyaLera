@@ -1,12 +1,19 @@
 import "./App.css";
-import Header from "./Header";
 import ToDoApp from "./ToDoApp";
+import Meal from "./Meal";
+import MyNavbar from "./MyNavbar"
+import NotFound from "./NotFound";
+import { Routes, Route } from 'react-router-dom'
 
 function App() {
   return (
     <>
-      <Header />
-      <ToDoApp />
+      <Routes>
+        <Route path="/" element={<MyNavbar />}/>
+        <Route path="/ToDoApp" element={<ToDoApp />}/>
+        <Route path="/Meal" element={<Meal />} />
+        <Route path="*" element={<NotFound />}/>
+      </Routes>     
     </>
   );
 }

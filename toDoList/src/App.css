@@ -1,7 +1,7 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  /* padding: 2rem; */
   text-align: center;
 }
 
@@ -67,4 +67,23 @@ input:focus-visible {
 
 span {
   display: block;
+}
+
+.link {
+  color: white;
+}
+
+nav {
+display: flex;
+width: 100vw;
+background-color: #888;
+}
+
+.nav-div {
+  margin: 20px;
+}
+
+.home {
+  color: rgb(23, 23, 23);
+  font-weight: bold;
 }

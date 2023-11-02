@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://{githubusername}.github.io/{base url}/",
+  "homepage": "https://BEAM-WD04-23.github.io/spa-react-todo-list-LyaLera/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

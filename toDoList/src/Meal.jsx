@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Meal() {
   const [meal, setMeal] = useState("");
@@ -46,7 +46,7 @@ export default function Meal() {
       <h3>Meal to prepare today:</h3>
       {isFetching && "...loading"}
       {error ? <p>{error}</p> : <><p>{meal[0]}</p><img src={meal[1]} width={"300px"}/><br/></>}
-      <button><Link className="link" to='/spa-react-todo-list-LyaLera/'>Back to Home Page</Link></button>
+      <button><NavLink className="link" to='/spa-react-todo-list-LyaLera/'>Back to Home Page</NavLink></button>
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import AddTasksFormik from "./AddTasksFormik";
 import List from "./List";
 import Header from "./Header";
@@ -79,7 +79,7 @@ export default function ToDoApp() {
         deleteTask={deleteTaskFromList}
         changeTask={changeTask}
       />
-      <button><Link className="link" to='/spa-react-todo-list-LyaLera/'>Back to Home Page</Link></button>
+      <button><NavLink className="link" to='/spa-react-todo-list-LyaLera/'>Back to Home Page</NavLink></button>
     </>
   );
 }

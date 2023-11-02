@@ -79,7 +79,7 @@ export default function ToDoApp() {
         deleteTask={deleteTaskFromList}
         changeTask={changeTask}
       />
-      <button><Link className="link" to='/'>Back to Home Page</Link></button>
+      <button><Link className="link" to='/spa-react-todo-list-LyaLera/'>Back to Home Page</Link></button>
     </>
   );
 }

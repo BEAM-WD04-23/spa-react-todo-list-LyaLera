@@ -4,7 +4,7 @@ export default function MyNavbar() {
   return (
     <nav>
         <div className="nav-div">
-          <NavLink className="home link" to="/">Home</NavLink>
+          <NavLink className="home link" to="/spa-react-todo-list-LyaLera">Home</NavLink>
         </div>
         <div className="nav-div">
           <NavLink className="link" to="/ToDoApp">My ToDo List</NavLink>

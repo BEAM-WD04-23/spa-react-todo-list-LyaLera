@@ -11,7 +11,7 @@ function App() {
     <>
     <MyNavbar />
       <Routes>
-        <Route path="/beam-wd04-23.github.io/spa-react-todo-list-LyaLera/" element={<Home />}/>
+        <Route path="/spa-react-todo-list-LyaLera/" element={<Home />}/>
         <Route path="/ToDoApp" element={<ToDoApp />}/>
         <Route path="/Meal" element={<Meal />} />
         <Route path="*" element={<NotFound />}/>

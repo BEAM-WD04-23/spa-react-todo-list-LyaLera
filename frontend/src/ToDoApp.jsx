@@ -6,32 +6,23 @@ import List from "./List";
 import Header from "./Header";
 
 export default function ToDoApp() {
-  const [list, setList] = useState(() => {
-    let savedTasks = JSON.parse(localStorage.getItem("tasks"));
-    return savedTasks || "";
-  });
+  const [list, setList] = useState([]);
+
+  const fetchTasks = async () => {
+    try {
+      let response = await fetch(`${import.meta.env.VITE_SERVER_TASKS}/todos`)
+      let data = await response.json()
+      let tasksFromServer = data.data
+      console.log(data)
+      setList(tasksFromServer)
+    } catch(error) {
+      console.log(error)
+    }
+  }
 
   useEffect(() => {
-    let ignore = false;
-
-    const setListTasks = () => {
-      if (!ignore) {
-        localStorage.setItem("tasks", JSON.stringify(list));
-        console.log("Not ignored")
-      }
-    };
-    setListTasks();
-    return () => {
-      console.log("Ignored")
-      ignore = true;
-    };
-  }, [list]);
-
-  // useEffect(() => {
-  //   localStorage.setItem("tasks", JSON.stringify(list))
-  // }, [list])
-
-  
+    fetchTasks()
+  }, [])
 
   const addTaskToList = (textOfTask) => {
     setList([

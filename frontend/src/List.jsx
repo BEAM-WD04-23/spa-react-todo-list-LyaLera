@@ -15,7 +15,7 @@ export default function List({ list, deleteTask, changeTask }) {
             <p key={task.id}>
               <Task task={task}
                 changeTask={changeTask}
-                deleteTask={deleteTask}
+                deleteTask={deleteTask} 
               />
             </p>
           );
@@ -42,7 +42,7 @@ function Task({ task, changeTask, deleteTask }) {
       </>
     );
   } else {
-    listContent = ( 
+    listContent = (  
       <>
         {task.name}
         <button onClick={() => setIsEditing(true)}>Edit</button>

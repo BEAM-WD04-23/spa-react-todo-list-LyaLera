@@ -7,7 +7,7 @@ export default function AddTasks({ addTask }) {
     <>
       <h3>Type your task to add to Your List</h3>
       <form 
-        onSubmit={(e) => {
+        onSubmit={(e) => { 
         e.preventDefault()
         setTask("")
         addTask(task)

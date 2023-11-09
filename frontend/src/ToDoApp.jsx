@@ -42,6 +42,38 @@ export default function ToDoApp() {
     }
   }
 
+  const putEditedTask = async (updatedTask) => {
+    try {
+      let response = await fetch(`${import.meta.env.VITE_SERVER_TASKS}/todos/${updatedTask.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(updatedTask)
+      })
+      if(response.status === 200) {
+        alert("Task was successfully updated")
+        console.log("Task successfully edited in the database")
+      } else {
+        let error = new Error("Could not edit task in the database")
+        throw error
+      }
+    } catch(error) {
+      console.log(error)
+    }
+  }
+
+  const deleteTaskInServer = async (id) => {
+    try {
+      let response = await fetch(`${import.meta.env.VITE_SERVER_TASKS}/todos/${id}`, {
+        method: "DELETE"
+      })
+      console.log(response)
+    } catch(error) {
+      console.log(error)
+    }
+  }
+
   const addTaskToList = (textOfTask) => {
     const newTask = {
       name: textOfTask,
@@ -57,18 +89,28 @@ export default function ToDoApp() {
       return task.id !== id;
     });
     setList(filteredList);
+    deleteTaskInServer(id)
   };
 
   const changeTask = (changedTask) => {
-    setList(
-      list.map((task) => {
-        if (task.id === changedTask.id) {
-          return changedTask;
-        } else {
-          return task;
-        }
-      })
-    );
+    let updatedTask = list.map((task) => {
+      if(task.id === changedTask.id) {
+        return changedTask;
+      } else {
+        return task
+      }
+    })
+    setList(updatedTask)
+    putEditedTask(updatedTask)
+    // setList(
+    //   list.map((task) => {
+    //     if (task.id === changedTask.id) {
+    //       return changedTask;
+    //     } else {
+    //       return task;
+    //     }
+    //   })
+    // );
   };
 
   const deleteAllTasks = () => {

@@ -1,21 +1,24 @@
 const express = require('express')
+const cors = require("cors")
 const { validationResult, body, param } = require("express-validator");
 const app = express()
+const port = 3000
 app.use(express.json())
+app.use(cors())
 
 app.get("/", (req, res) => {
     res.send("Hello World!")
 })
 
 let mockdata = [
-    { text: "Build a to do app!", status: 'open', id: "779df936-5c55-4943-9c2b-fde29d1c1e54" },
-    { text: "Learn SQL", status: 'open', id: '23ea14b5-0d59-4e55-94b7-cdb432f3628f'  },
-    { text: "Practice JS on Codewars", status: 'open', id: '9e0fcd36-b8b1-4905-834b-e0e72796f5a5'   },
-    { text: "Commit your code!", status: 'open', id: '92a4574e-7268-41a0-9a5f-e049e95e2e71'},
+    { name: "Build a to do app!", done: false, id: "779df936-5c55-4943-9c2b-fde29d1c1e54" },
+    { name: "Learn SQL", done: false, id: '23ea14b5-0d59-4e55-94b7-cdb432f3628f'},
+    { name: "Practice JS on Codewars", done: false, id: '9e0fcd36-b8b1-4905-834b-e0e72796f5a5'},
+    { name: "Commit your code!", done: false, id: '92a4574e-7268-41a0-9a5f-e049e95e2e71'},
 ]
 
 const validTask = [
-    body("text")
+    body("name")
     .notEmpty()
     .withMessage("Please type your task")
     .isLength({min: 2, max: 25})
@@ -23,12 +26,9 @@ const validTask = [
     .trim()
     .escape(),
 
-    body("status")
-    .notEmpty()
-    // .isIn(["open", "done"])
-    .withMessage("Status could be only open or done")
-    .trim()
-    .escape(),
+    body("done")
+    .isBoolean()
+    .notEmpty(),
 
     body("id")
     .notEmpty()
@@ -38,7 +38,10 @@ const validTask = [
 ]
 
 app.get("/todos", (req, res) => {
-    res.status(200).send("This is what you can do: " + mockdata.map(todo =>  todo.text))
+    res.status(200).json({
+        success: true,
+        data: mockdata
+    })
 })
 
 app.post("/todos", validTask, (req, res) => {
@@ -49,6 +52,7 @@ app.post("/todos", validTask, (req, res) => {
             message: "New task saved"
         })
         mockdata.push(req.body)
+        console.log(req.body)
         console.log(mockdata)
     } else {
         res.status(400).send({errors: result.array()})
@@ -84,15 +88,11 @@ app.delete("/todos/:id", param("id").isUUID(), (req, res) => {
     console.log(mockdata)
 })
 
-app.listen(3000, () => {
-    console.log(`Example app listening on port 3000`)
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
 })
 
 app.all('*', (req, res, next) => {
-    // res.status(404).json({
-    //   status: 'fail',
-    //   message: `Can't find ${req.originalUrl} on this server!`
-    // });
     const err = new Error(`Can't find ${req.originalUrl} on this server!`)
     err.status = "fail",
     err.statusCode = 404

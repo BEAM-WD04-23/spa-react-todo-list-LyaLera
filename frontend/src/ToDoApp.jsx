@@ -13,7 +13,6 @@ export default function ToDoApp() {
       let response = await fetch(`${import.meta.env.VITE_SERVER_TASKS}/todos`)
       let data = await response.json()
       let tasksFromServer = data.data
-      console.log(data)
       setList(tasksFromServer)
     } catch(error) {
       console.log(error)
@@ -24,15 +23,33 @@ export default function ToDoApp() {
     fetchTasks()
   }, [])
 
+  const postTask = async (newTask) => {
+    try {
+      let response = await fetch(`${import.meta.env.VITE_SERVER_TASKS}/todos`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(newTask)
+      })
+      if(response.status === 201) {
+        alert("New task was added")
+        console.log("Task successfully was added to database")
+      } else {
+        let error = new Error("Could not add task to database")
+        throw error
+      }
+    } catch(error) {
+      console.log(error)
+    }
+  }
+
   const addTaskToList = (textOfTask) => {
-    setList([
-      ...list,
-      {
-        name: textOfTask,
-        done: false,
-        id: uuidv4(),
-      },
-    ]);
+    const newTask = {
+      name: textOfTask,
+      done: false,
+      id: uuidv4(),
+    }
+    setList([...list, newTask])
+    postTask(newTask)
   };
 
   const deleteTaskFromList = (id) => {

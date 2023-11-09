@@ -2,7 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup'
 
 const AddTasksFormik = ({addTask}) => (
-  <Formik
+  <Formik 
   initialValues={{textOfTask: ""}}
   validationSchema={Yup.object({
     textOfTask: Yup.string()

@@ -11,10 +11,10 @@ app.get("/", (req, res) => {
 })
 
 let mockdata = [
-    { name: "Build a to do app!", done: false, id: "779df936-5c55-4943-9c2b-fde29d1c1e54" },
+    { name: "Build a to do app", done: false, id: "779df936-5c55-4943-9c2b-fde29d1c1e54" },
     { name: "Learn SQL", done: false, id: '23ea14b5-0d59-4e55-94b7-cdb432f3628f'},
     { name: "Practice JS on Codewars", done: false, id: '9e0fcd36-b8b1-4905-834b-e0e72796f5a5'},
-    { name: "Commit your code!", done: false, id: '92a4574e-7268-41a0-9a5f-e049e95e2e71'},
+    { name: "Commit your code", done: false, id: '92a4574e-7268-41a0-9a5f-e049e95e2e71'},
 ]
 
 const validTask = [
@@ -67,7 +67,7 @@ app.put("/todos/:id", param("id").isUUID(), validTask, (req, res) => {
             message: "New task was updated"
         })
         let taskIndex = mockdata.findIndex(task => 
-            task.id == task.body.id
+            task.id == req.body.id
         )
         mockdata[taskIndex] = req.body
         console.log(mockdata)

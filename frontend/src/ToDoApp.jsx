@@ -32,9 +32,9 @@ export default function ToDoApp() {
       })
       if(response.status === 201) {
         alert("New task was added")
-        console.log("Task successfully was added to database")
+        console.log("Task successfully was added to server")
       } else {
-        let error = new Error("Could not add task to database")
+        let error = new Error("Could not add task to server")
         throw error
       }
     } catch(error) {
@@ -52,10 +52,10 @@ export default function ToDoApp() {
         body: JSON.stringify(updatedTask)
       })
       if(response.status === 200) {
-        alert("Task was successfully updated")
-        console.log("Task successfully edited in the database")
+        // alert("Task was updated in server")
+        console.log("Task successfully edited in a server")
       } else {
-        let error = new Error("Could not edit task in the database")
+        let error = new Error("Could not edit task in a server")
         throw error
       }
     } catch(error) {
@@ -68,6 +68,7 @@ export default function ToDoApp() {
       let response = await fetch(`${import.meta.env.VITE_SERVER_TASKS}/todos/${id}`, {
         method: "DELETE"
       })
+      alert("Task was deleted in a server")
       console.log(response)
     } catch(error) {
       console.log(error)
@@ -101,7 +102,8 @@ export default function ToDoApp() {
       }
     })
     setList(updatedTask)
-    putEditedTask(updatedTask)
+    putEditedTask(changedTask)
+    console.log(changedTask)
     // setList(
     //   list.map((task) => {
     //     if (task.id === changedTask.id) {

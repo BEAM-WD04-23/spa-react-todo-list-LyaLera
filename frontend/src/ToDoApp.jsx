@@ -51,7 +51,7 @@ export default function ToDoApp() {
         },
         body: JSON.stringify(updatedTask)
       })
-      if(response.status === 200) {
+      if(response.status === 201) {
         // alert("Task was updated in server")
         console.log("Task successfully edited in a server")
       } else {
@@ -75,17 +75,17 @@ export default function ToDoApp() {
     }
   }
 
-  // const deleteAllTasksInServer = async () => {
-  //   try {
-  //     let response = await fetch(`${import.meta.env.VITE_SERVER_TASKS}/todos`, {
-  //       method: "DELETE",
-  //     })
-  //     // alert("All tasks was deleted in a server")
-  //     console.log(response)
-  //   } catch(error) {
-  //     console.log(error)
-  //   }
-  // }
+  const deleteAllTasksInServer = async () => {
+    try {
+      let response = await fetch(`${import.meta.env.VITE_SERVER_TASKS}/todos`, {
+        method: "DELETE",
+      })
+      // alert("All tasks was deleted in a server")
+      console.log(response)
+    } catch(error) {
+      console.log(error)
+    }
+  }
 
   const addTaskToList = (textOfTask) => {
     const newTask = {
@@ -119,7 +119,7 @@ export default function ToDoApp() {
 
   const deleteAllTasks = () => {
     setList("");
-    // deleteAllTasksInServer()
+    deleteAllTasksInServer()
   };
 
   console.log(list);

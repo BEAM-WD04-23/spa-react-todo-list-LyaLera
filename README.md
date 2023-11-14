@@ -6,4 +6,6 @@
  5. Imported mongoose and dotenv 
  6. Created a variable to pass Url (connectionStringOfDB)
  7. Created connect, Schema and Model 
+ 8. Updated GET, PUT, POST and DELETE requests
+ 9. Added DeletMany request
 

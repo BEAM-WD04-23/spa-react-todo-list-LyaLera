@@ -15,7 +15,7 @@ export default function List({ list, deleteTask, changeTask }) {
             <p key={task.id}>
               <Task task={task}
                 changeTask={changeTask}
-                deleteTask={deleteTask} 
+                deleteTask={deleteTask}  
               />
             </p>
           );

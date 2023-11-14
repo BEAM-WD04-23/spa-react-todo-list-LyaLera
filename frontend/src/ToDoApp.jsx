@@ -68,7 +68,19 @@ export default function ToDoApp() {
       let response = await fetch(`${import.meta.env.VITE_SERVER_TASKS}/todos/${id}`, {
         method: "DELETE"
       })
+      console.log(response)
       alert("Task was deleted in a server")
+    } catch(error) {
+      console.log(error)
+    }
+  }
+
+  const deleteAllTasksInServer = async () => {
+    try {
+      let response = await fetch(`${import.meta.env.VITE_SERVER_TASKS}/todos`, {
+        method: "DELETE",
+      })
+      // alert("All tasks was deleted in a server")
       console.log(response)
     } catch(error) {
       console.log(error)
@@ -103,20 +115,11 @@ export default function ToDoApp() {
     })
     setList(updatedTask)
     putEditedTask(changedTask)
-    console.log(changedTask)
-    // setList(
-    //   list.map((task) => {
-    //     if (task.id === changedTask.id) {
-    //       return changedTask;
-    //     } else {
-    //       return task;
-    //     }
-    //   })
-    // );
   };
 
   const deleteAllTasks = () => {
-    setList("");
+    // setList("");
+    deleteAllTasksInServer()
   };
 
   console.log(list);

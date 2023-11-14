@@ -1,20 +1,42 @@
 const express = require('express')
 const cors = require("cors")
+require('dotenv').config()
+const mongoose = require('mongoose');
 const { validationResult, body, param } = require("express-validator");
 const app = express()
 const port = 3000
 app.use(express.json())
 app.use(cors())
 
+const connectionStringOfDB = process.env.DATABASE_CONNECTION
+
+mongoose.connect(connectionStringOfDB)
+.then(() => {
+    console.log("Connection to database successfull")
+})
+.catch(error => {
+    console.log("Connection failed")
+}) 
+
+const { Schema } = mongoose;
+
+const taskSchema = new Schema({
+  name: String, 
+  done: Boolean,
+  id: String
+});
+
+const ToDoApp = mongoose.model('task', taskSchema);
+
 app.get("/", (req, res) => {
     res.send("Hello World!")
 })
 
 let mockdata = [
-    { name: "Build a to do app", done: false, id: "779df936-5c55-4943-9c2b-fde29d1c1e54" },
-    { name: "Learn SQL", done: false, id: '23ea14b5-0d59-4e55-94b7-cdb432f3628f'},
-    { name: "Practice JS on Codewars", done: false, id: '9e0fcd36-b8b1-4905-834b-e0e72796f5a5'},
-    { name: "Commit your code", done: false, id: '92a4574e-7268-41a0-9a5f-e049e95e2e71'},
+    // { name: "Build a to do app", done: false, id: "779df936-5c55-4943-9c2b-fde29d1c1e54" },
+    // { name: "Learn SQL", done: false, id: '23ea14b5-0d59-4e55-94b7-cdb432f3628f'},
+    // { name: "Practice JS on Codewars", done: false, id: '9e0fcd36-b8b1-4905-834b-e0e72796f5a5'},
+    // { name: "Commit your code", done: false, id: '92a4574e-7268-41a0-9a5f-e049e95e2e71'},
 ]
 
 const validTask = [
@@ -37,11 +59,19 @@ const validTask = [
     .escape()
 ]
 
-app.get("/todos", (req, res) => {
-    res.status(200).json({
-        success: true,
-        data: mockdata
-    })
+app.get("/todos", async (req, res, next) => {
+    try {
+        let dataFromDB = await ToDoApp.find({})
+        console.log(dataFromDB)
+        res.status(200).json({
+            success: true,
+            data: dataFromDB
+        })
+    } catch(err) {
+        console.log(err)
+        let errReport = new Error("Could not get data from DB")
+        next(errReport)
+    }
 })
 
 app.post("/todos", validTask, (req, res) => {

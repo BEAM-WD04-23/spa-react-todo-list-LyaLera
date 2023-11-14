@@ -75,17 +75,17 @@ export default function ToDoApp() {
     }
   }
 
-  const deleteAllTasksInServer = async () => {
-    try {
-      let response = await fetch(`${import.meta.env.VITE_SERVER_TASKS}/todos`, {
-        method: "DELETE",
-      })
-      // alert("All tasks was deleted in a server")
-      console.log(response)
-    } catch(error) {
-      console.log(error)
-    }
-  }
+  // const deleteAllTasksInServer = async () => {
+  //   try {
+  //     let response = await fetch(`${import.meta.env.VITE_SERVER_TASKS}/todos`, {
+  //       method: "DELETE",
+  //     })
+  //     // alert("All tasks was deleted in a server")
+  //     console.log(response)
+  //   } catch(error) {
+  //     console.log(error)
+  //   }
+  // }
 
   const addTaskToList = (textOfTask) => {
     const newTask = {
@@ -118,8 +118,8 @@ export default function ToDoApp() {
   };
 
   const deleteAllTasks = () => {
-    // setList("");
-    deleteAllTasksInServer()
+    setList("");
+    // deleteAllTasksInServer()
   };
 
   console.log(list);

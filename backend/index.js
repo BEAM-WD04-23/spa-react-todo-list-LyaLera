@@ -10,6 +10,8 @@ app.use(cors());
 
 const connectionStringOfDB = process.env.DATABASE_CONNECTION;
 
+
+//connection to database
 mongoose
 .connect(connectionStringOfDB)
 .then(() => {

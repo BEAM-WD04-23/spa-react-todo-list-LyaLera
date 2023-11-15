@@ -11,13 +11,13 @@ app.use(cors());
 const connectionStringOfDB = process.env.DATABASE_CONNECTION;
 
 mongoose
-  .connect(connectionStringOfDB)
-  .then(() => {
+.connect(connectionStringOfDB)
+.then(() => {
     console.log("Connection to database successfull");
-  })
-  .catch((error) => {
+})
+.catch((error) => {
     console.log("Connection failed");
-  });
+});
 
 const { Schema } = mongoose;
 

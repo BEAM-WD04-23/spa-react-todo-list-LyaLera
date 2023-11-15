@@ -11,10 +11,14 @@ app.use(express.urlencoded({ extended: true }))
 
 const connectionStringOfDB = process.env.DATABASE_CONNECTION;
 
-
+let options = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}
+  
 //connection to database
 mongoose
-.connect(connectionStringOfDB)
+.connect(connectionStringOfDB, options)
 .then(() => {
     console.log("Connection to database successfull");
 })

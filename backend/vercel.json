@@ -8,7 +8,7 @@
     ],
     "routes": [
       {
-        "src": "spa-react-todo-list-lya-lera-orcin.vercel.app/todos",
+        "src": "/todos",
         "dest": "index.js"
       }
     ]

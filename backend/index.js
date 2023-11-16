@@ -44,7 +44,7 @@ const validTask = [
   body("name")
     .notEmpty()
     .withMessage("Please type your task")
-    .isLength({ min: 2, max: 25 })
+    .isLength({ min: 2, max: 35 })
     .matches(/^[A-Za-z\s]+$/)
     .trim()
     .escape(),
@@ -82,6 +82,7 @@ app.post("/todos", validTask, async (req, res, next) => {
         success: true,
         message: "New task saved",
       });
+      console.log(newTaskToDB)
     } catch (err) {
       let errReport = new Error("Could not post data to DB");
       next(errReport);
